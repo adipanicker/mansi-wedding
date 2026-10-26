@@ -13,6 +13,7 @@
 }
 
 @theme {
+  /* ADMIN tokens */
   --font-serif: var(--font-playfair), "Playfair Display", Georgia, serif;
   --font-body: var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif;
   --color-blush: #FFF5F7;
@@ -24,13 +25,47 @@
   --color-maroon: #3A1F27;
   --color-maroon-muted: #8A6A73;
   --color-gold: #C9A24B;
+
+  /* INVITE tokens (colors only, fonts are handled in .invite-root below) */
+  --color-maroon-950: #2a0509;
+  --color-maroon-900: #4a0a12;
+  --color-maroon-800: #6b0f1a;
+  --color-gold-300: #f3d98b;
+  --color-gold-400: #e8b84a;
+  --color-gold-500: #d4952a;
+  --color-cream-50: #fff9ee;
+  --color-cream-100: #f7ecd8;
+
+  --color-blush-50: #fff5f8;
+  --color-blush-100: #fde8ee;
+  --color-blush-200: #f9d3de;
+  --color-petal-300: #f0b3c5;
+  --color-petal-400: #e8a0b4;
+  --color-petal-500: #d9708f;
+  --color-petal-600: #c2557a;
+  --color-plum-700: #7a2a45;
+  --color-plum-900: #4a1428;
+  --color-ruby-600: #b3162d;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* INVITE scope: these only apply inside the invitation */
+.invite-root {
+  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  color: var(--color-maroon-900);
+  background: var(--color-blush-50);
+  overflow-x: hidden;
+}
+
+.invite-root .font-script {
+  font-family: var(--font-great-vibes), "Great Vibes", cursive;
+}
+
+.invite-root .font-sans {
+  font-family: var(--font-poppins), Poppins, sans-serif;
+}
+
+.invite-root .font-serif {
+  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
 }
 
 body {
@@ -38,4 +73,3 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
-
