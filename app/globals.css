@@ -12,6 +12,20 @@
   --font-mono: var(--font-geist-mono);
 }
 
+@theme {
+  --font-serif: var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-body: var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif;
+  --color-blush: #FFF5F7;
+  --color-blush-subtle: #FCE4EA;
+  --color-blush-border: #F7D6DE;
+  --color-rose-primary: #B3193A;
+  --color-rose-hover: #8F122D;
+  --color-rose-surface: #FCE4EA;
+  --color-maroon: #3A1F27;
+  --color-maroon-muted: #8A6A73;
+  --color-gold: #C9A24B;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -24,3 +38,4 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
