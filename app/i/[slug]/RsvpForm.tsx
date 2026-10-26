@@ -1,0 +1,62 @@
+"use client";
+
+import { useState, useTransition } from "react";
+import { submitRsvp } from "./actions";
+
+export default function RsvpForm({
+  slug,
+  initialStatus,
+}: {
+  slug: string;
+  initialStatus: "yes" | "no" | null;
+}) {
+  const [status, setStatus] = useState(initialStatus);
+  const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState("");
+
+  function choose(next: "yes" | "no") {
+    setError("");
+    startTransition(async () => {
+      const res = await submitRsvp(slug, next);
+      if (res.ok) setStatus(next);
+      else setError("Something went wrong. Please try again.");
+    });
+  }
+
+  const btn = (active: boolean) => ({
+    padding: "10px 20px",
+    borderRadius: 8,
+    border: active ? "2px solid white" : "1px solid #666",
+    fontWeight: active ? 700 : 400,
+    cursor: "pointer",
+  });
+
+  return (
+    <section style={{ marginTop: 32 }}>
+      <h2>Will you be gracing us with your presence?</h2>
+      <div style={{ display: "flex", gap: 12, marginTop: 12 }}>
+        <button
+          disabled={isPending}
+          onClick={() => choose("yes")}
+          style={btn(status === "yes")}
+        >
+          Joyfully accepts
+        </button>
+        <button
+          disabled={isPending}
+          onClick={() => choose("no")}
+          style={btn(status === "no")}
+        >
+          Regretfully declines
+        </button>
+      </div>
+      {status && (
+        <p style={{ marginTop: 8 }}>
+          Your response: {status === "yes" ? "Attending" : "Not attending"}. You
+          can change it anytime.
+        </p>
+      )}
+      {error && <p style={{ color: "tomato" }}>{error}</p>}
+    </section>
+  );
+}
