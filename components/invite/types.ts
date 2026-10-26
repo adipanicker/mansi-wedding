@@ -10,3 +10,5 @@ export type EventRow = {
 };
 
 export type RsvpStatus = "yes" | "no" | null;
+
+export type Wish = { id: string; author: string; message: string };

@@ -5,24 +5,29 @@ import { submitRsvp } from "@/app/i/[slug]/actions";
 import type { RsvpStatus } from "./types";
 
 export default function RsvpSection({
-    slug,
-    initialStatus,
+  slug,
+  initialStatus,
+  onChange,
 }: {
-    slug: string;
-    initialStatus: RsvpStatus;
+  slug: string;
+  initialStatus: RsvpStatus;
+  onChange?: (status: "yes" | "no") => void;
 }) {
-    const [status, setStatus] = useState<RsvpStatus>(initialStatus);
-    const [isPending, startTransition] = useTransition();
-    const [error, setError] = useState("");
+  const [status, setStatus] = useState<RsvpStatus>(initialStatus);
+  const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState("");
 
-    function choose(next: "yes" | "no") {
-        setError("");
-        startTransition(async () => {
-            const res = await submitRsvp(slug, next);
-            if (res.ok) setStatus(next);
-            else setError("Something went wrong. Please try again.");
-        });
-    }
+  function choose(next: "yes" | "no") {
+    setError("");
+    startTransition(async () => {
+      const res = await submitRsvp(slug, next);
+      if (res.ok) {
+        setStatus(next);
+        onChange?.(next);
+      } else setError("Something went wrong. Please try again.");
+    });
+  }
+
 
     const btn = (active: boolean) => ({
         padding: "10px 20px",

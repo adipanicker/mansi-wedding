@@ -4,6 +4,7 @@ import {
   LayoutDashboard,
   Users,
   CalendarHeart,
+  MessageSquareHeart,
   LogOut,
   Menu,
   X,
@@ -120,6 +121,13 @@ export default function AdminDashboardLayout({
               <CalendarHeart className="w-4 h-4 text-rose-primary" />
               <span>Events</span>
             </Link>
+            <Link
+              href="/admin/dashboard/wishes"
+              className="flex items-center gap-3 px-3.5 py-2.5 text-sm font-medium rounded-xl text-maroon hover:text-rose-primary hover:bg-rose-surface transition-colors"
+            >
+              <MessageSquareHeart className="w-4 h-4 text-rose-primary" />
+              <span>Wishes</span>
+            </Link>
           </nav>
         </div>
 
@@ -184,6 +192,13 @@ export default function AdminDashboardLayout({
             >
               <CalendarHeart className="w-4 h-4 text-maroon-muted group-hover:text-rose-primary transition-colors" />
               <span>Events</span>
+            </Link>
+            <Link
+              href="/admin/dashboard/wishes"
+              className="flex items-center gap-3 px-3.5 py-2.5 text-sm font-medium rounded-xl text-maroon hover:text-rose-primary hover:bg-rose-surface transition-all group"
+            >
+              <MessageSquareHeart className="w-4 h-4 text-maroon-muted group-hover:text-rose-primary transition-colors" />
+              <span>Wishes</span>
             </Link>
           </nav>
         </div>

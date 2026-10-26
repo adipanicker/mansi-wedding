@@ -18,3 +18,31 @@ export async function submitRsvp(slug: string, status: "yes" | "no") {
   revalidatePath(`/i/${slug}`);
   return { ok: true };
 }
+
+export async function postWish(slug: string, message: string) {
+  const text = message.trim();
+  if (text.length < 1) return { ok: false, error: "Please write a message." };
+  if (text.length > 400)
+    return { ok: false, error: "Please keep it under 400 characters." };
+
+  const { data: guest } = await supabaseAdmin
+    .from("guests")
+    .select("id")
+    .eq("slug", slug)
+    .maybeSingle();
+
+  if (!guest) return { ok: false, error: "Invitation not found." };
+
+  const { error } = await supabaseAdmin.from("wishes").upsert(
+    {
+      guest_id: guest.id,
+      message: text,
+      updated_at: new Date().toISOString(),
+    },
+    { onConflict: "guest_id" }
+  );
+
+  if (error) return { ok: false, error: "Could not save your wish. Please try again." };
+  return { ok: true };
+}
+
